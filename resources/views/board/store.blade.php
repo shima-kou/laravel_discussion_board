@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('board.create') }}">
+                    <form method="POST">
                       @csrf
                       <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
                       <div class="form-group row">

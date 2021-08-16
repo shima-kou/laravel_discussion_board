@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\BoardRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Board;
 
 class BoardController extends Controller
@@ -29,11 +31,10 @@ class BoardController extends Controller
     }
 
     public function add() {
-        return view('board.create');
+        return view('board.store');
     }
 
-    public function create(Request $request) {
-        $this->validate($request, Board::$rules);
+    public function store(BoardRequest $request) {
         $board = new Board;
         $form = $request->all();
         unset($form['_token']);
@@ -41,21 +42,25 @@ class BoardController extends Controller
         return redirect('/');
     }
 
-    public function edit(Request $request) {
-        $post = Board::find($request->post_id);
+    public function edit($id) {
+        $user_id = Auth::user()->id;
+        $post = Board::find($id);
+        if($user_id !== $post->user_id) {
+            abort(404);
+        }
         return view('board.edit', ['post' => $post]);
     }
 
-    public function update(Request $request) {
-        $post = Board::find($request->post_id);
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->save();
+    public function update(BoardRequest $request, $id) {
+        $board = Board::find($request->id);
+        $form = $request->all();
+        unset($form['_token']);
+        $board->fill($form)->save();
         return redirect('/');
     }
 
-    public function delete(Request $request) {
-        Board::where('id', $request->post_id)->delete();
+    public function delete($id) {
+        Board::where('id', $id)->delete();
         return redirect('/');
     }
 

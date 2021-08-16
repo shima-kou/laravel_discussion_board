@@ -15,11 +15,10 @@ Auth::routes();
 Route::get('/', 'BoardController@index')->name('home');
 
 Route::get('/board', 'BoardController@add')->name('board.add');
-Route::post('/board', 'BoardController@create')->name('board.create');
+Route::post('/board', 'BoardController@store')->name('board.store');
 
-Route::get('/board/edit', 'BoardController@return');
-Route::post('/board/edit', 'BoardController@edit')->name('board.edit');
-Route::patch('/board/edit', 'BoardController@update')->name('board.update');
+Route::get('/board/{id}', 'BoardController@edit');
+Route::patch('/board/{id}', 'BoardController@update');
 
-Route::get('/board/delete', 'BoardController@return');
-Route::delete('/board/delete', 'BoardController@delete')->name('board.delete');
+Route::get('/board/delete/{id}', 'BoardController@return');
+Route::delete('/board/delete/{id}', 'BoardController@delete');

@@ -21,17 +21,15 @@
                                 @if ($item->user_id === Auth::user()->id)
                                 <div class="col-6">
 
-                                    <form method="POST" action="{{ route('board.edit') }}">
+                                    <form method="GET" action="/board/{{ $item->id }}">
                                         @csrf
-                                        <input type="hidden" name="post_id" value="{{ $item->id }}">
                                         <button type="submit" class="btn btn-primary">編集する</button>
                                     </form>
                                 </div>
                                 <div class="col-6">
-                                    <form method="POST" action="{{ route('board.delete') }}">
+                                    <form method="POST" action="/board/delete/{{ $item->id }}">
                                         @csrf
                                         @method('delete')
-                                        <input type="hidden" name="post_id" value="{{ $item->id }}">
                                         <button type="submit" class="btn btn-secondary">削除する</button>
                                     </form>
                                 </div>
