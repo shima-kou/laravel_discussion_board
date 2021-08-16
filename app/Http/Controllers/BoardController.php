@@ -52,7 +52,7 @@ class BoardController extends Controller
     }
 
     public function update(BoardRequest $request, $id) {
-        $board = Board::find($request->id);
+        $board = Board::find($id);
         $form = $request->all();
         unset($form['_token']);
         $board->fill($form)->save();
