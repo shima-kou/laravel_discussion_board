@@ -13,7 +13,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
                     <form method="POST">
                       @csrf
                       <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
@@ -21,7 +20,6 @@
                         <label for="title" class="col-12 col-form-label">タイトル</label>
                         <div class="col-12">
                             <input id="title" type="string" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
-
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -29,13 +27,10 @@
                             @enderror
                         </div>
                       </div>
-
                       <div class="form-group row">
                         <label for="content" class="col-12 col-form-label">コンテンツ</label>
-
                         <div class="col-12">
                             <textarea id="content" type="string" class="form-control @error('content') is-invalid @enderror" name="content" required>{{ old('content') }}</textarea>
-
                             @error('content')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -43,7 +38,6 @@
                             @enderror
                         </div>
                       </div>
-
                       <div class="form-group row mb-10">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">

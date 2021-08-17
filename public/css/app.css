@@ -10942,3 +10942,9 @@ a.text-dark:focus {
   }
 }
 
+.heart-icon {
+  max-width: 15px;
+  height: auto;
+  margin: 0 5px 3px 0;
+}
+
