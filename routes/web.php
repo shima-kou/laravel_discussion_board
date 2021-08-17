@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'BoardController@index')->name('home');
+
+Route::get('/board', 'BoardController@add')->name('board.add');
+Route::post('/board', 'BoardController@store')->name('board.store');
+
+Route::get('/board/{id}', 'BoardController@edit');
+Route::patch('/board/{id}', 'BoardController@update');
+
+Route::get('/board/delete/{id}', 'BoardController@return');
+Route::delete('/board/delete/{id}', 'BoardController@delete');
