@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BoardRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Board;
+use App\Like;
 
 class BoardController extends Controller
 {
@@ -66,5 +67,22 @@ class BoardController extends Controller
 
     public function return() {
         return redirect('/');
+    }
+
+    public function like($id)
+    {
+        $like = new Like;
+        $like->fill([
+            'post_id' => $id,
+            'user_id' => Auth::id(),
+        ])->save();
+        return redirect()->back();
+    }
+
+    public function unlike($id)
+    {
+        $like = Like::where('post_id', $id)->where('user_id', Auth::id())->first();
+        $like->delete();
+        return redirect()->back();
     }
 }

@@ -6,9 +6,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">編集</div>
-
                 <div class="card-body">
-                    <form method="POST" action="/board/{{$post->id}}">
+                    <form method="POST" action="{{ route('board.update', ['id' => $post->id]) }}">
                         @csrf
                         @method('patch')
                         <input type="hidden" name="id" value="{{$post->id}}" />
@@ -23,7 +22,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="content" class="col-12 col-form-label">コンテンツ</label>
                             <div class="col-12">
@@ -35,7 +33,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row mb-10">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary" value="send">編集完了</button>
